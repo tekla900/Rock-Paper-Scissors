@@ -1,5 +1,5 @@
 function getUserChoice() {
-    console.log(userInput);
+    // console.log(userInput);
     if (userInput.toLowerCase == 'rock' || userInput == 'paper' || userInput == 'scissors') {
         return userInput;
     } else {
@@ -33,25 +33,31 @@ function playRound(playerSelection, computerSelection) {
 function game() {
     let playerScore = 0;
     let computerScore = 0;
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < 3; i++) {
         let userInput = prompt('Rock, Paper, or Scissors ?');
-        userInput = userInput.toLowerCase();
-        let computerSelection = getComputerChoice();
-        let oneRound = playRound(userInput, computerSelection);
-        console.log(oneRound);
-        let result = oneRound.slice(4, 5);
-        if (result == 'W') {
-            playerScore += 1;
-        } else if (result == 'L') {
-            computerScore += 1;
+        if (userInput.toLowerCase == 'rock' || userInput == 'paper' || userInput == 'scissors') {
+            userInput = userInput.toLowerCase();
+            let computerSelection = getComputerChoice();
+            let oneRound = playRound(userInput, computerSelection);
+            console.log(oneRound);
+            let result = oneRound.slice(4, 5);
+            if (result == 'W') {
+                playerScore += 1;
+            } else if (result == 'L') {
+                computerScore += 1;
+            }
+
+            if (playerScore > computerScore) {
+                console.log(`Yon won! Final score is ${playerScore}:${computerScore}`)
+            } else {
+                console.log(`Yon Lost! Final score is ${playerScore}:${computerScore}`)
+            }
+        } else {
+            console.log('invalid input');
+            break;
         }
     }
-
-    if (playerScore > computerScore) {
-        console.log(`Yon won! Final score is ${playerScore}:${computerScore}`)
-    } else {
-        console.log(`Yon Lost! Final score is ${playerScore}:${computerScore}`)
-    }
+   
 }
 
 game();
