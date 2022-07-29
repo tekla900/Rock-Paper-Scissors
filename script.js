@@ -1,12 +1,3 @@
-function getUserChoice() {
-    // console.log(userInput);
-    if (userInput.toLowerCase == 'rock' || userInput == 'paper' || userInput == 'scissors') {
-        return userInput;
-    } else {
-        
-        return 'invalid input';
-    }
-}
 function getComputerChoice() {
     const choice = ['rock', 'paper', 'scissors'];
     return choice[Math.floor(Math.random() * 3)]
@@ -35,8 +26,8 @@ function game() {
     let computerScore = 0;
     for (let i = 0; i < 3; i++) {
         let userInput = prompt('Rock, Paper, or Scissors ?');
-        if (userInput.toLowerCase == 'rock' || userInput == 'paper' || userInput == 'scissors') {
-            userInput = userInput.toLowerCase();
+        userInput = userInput.toLowerCase();
+        if (userInput == 'rock' || userInput == 'paper' || userInput == 'scissors') { 
             let computerSelection = getComputerChoice();
             let oneRound = playRound(userInput, computerSelection);
             console.log(oneRound);
@@ -46,18 +37,17 @@ function game() {
             } else if (result == 'L') {
                 computerScore += 1;
             }
-
-            if (playerScore > computerScore) {
-                console.log(`Yon won! Final score is ${playerScore}:${computerScore}`)
-            } else {
-                console.log(`Yon Lost! Final score is ${playerScore}:${computerScore}`)
-            }
+            
         } else {
             console.log('invalid input');
             break;
         }
     }
-   
+    if (playerScore > computerScore) {
+        console.log(`Yon won! Final score is ${playerScore}:${computerScore}`)
+    } else {
+        console.log(`Yon Lost! Final score is ${playerScore}:${computerScore}`)
+    }
 }
 
 game();
