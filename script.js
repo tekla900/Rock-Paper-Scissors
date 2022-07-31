@@ -4,30 +4,76 @@ function getComputerChoice() {
 }
 
 function playRound(playerSelection, computerSelection) {
+
+    // let playerScore = 0;
+    // let computerScore = 0;
+    const res = document.querySelector('.results');
+
     if (playerSelection.toLowerCase() == computerSelection) {
-        return "It's a Tie!";
+        res.textContent = "It's a Tie!" + `current score is ${playerScore} : ${computerScore}`;
+        console.log('პირველი იფი');
+        // console.log(playerScore + ':' +  computerScore);
     } else if (playerSelection.toLowerCase() == 'rock' && computerSelection == 'scissors') {
-        return 'You Win! Rock beats Scissors';
+        playerScore += 1;
+        res.textContent = 'You Win! Rock beats Scissors' + `current score is ${playerScore} : ${computerScore}`;
+        // console.log(playerScore + ':' +  computerScore);
+        console.log('მეორე');
     } else if (playerSelection.toLowerCase() == 'scissors' && computerSelection == 'rock') {
-        return 'You Lose! Rock beats Scissors';
+        computerScore += 1;
+        res.textContent = 'You Lose! Rock beats Scissors' + `current score is ${playerScore} : ${computerScore}`;
+        console.log(playerScore + ':' +  computerScore);
+        console.log('მესამე იფი');
     } else if (playerSelection.toLowerCase() == 'paper' && computerSelection == 'scissors') {
-        return 'You Lose! Scissors beats Paper';
+        computerScore += 1;
+        res.textContent = 'You Lose! Scissors beats Paper' + `current score is ${playerScore} : ${computerScore}`;
+        console.log(playerScore + ':' +  computerScore);
+        console.log('მეოთხე იფი');
     } else if (playerSelection.toLowerCase() == 'scissors' && computerSelection == 'paper') {
-        return 'You Win! Scissors beats Paper';
+        playerScore += 1;
+        res.textContent = 'You Win! Scissors beats Paper' + `current score is ${playerScore} : ${computerScore}`;
+        console.log(playerScore + ':' +  computerScore);
+        console.log('მეხუთე');
     } else if (playerSelection.toLowerCase() == 'rock' && computerSelection == 'paper') {
-        return 'You Lose! Paper beats Rock';
+        computerScore += 1;
+        res.textContent = 'You Lose! Paper beats Rock' + `current score is ${playerScore} : ${computerScore}`;
+        console.log(playerScore + ':' +  computerScore);
+        console.log('მეექვსე');
     } else if (playerSelection.toLowerCase() == 'paper' && computerSelection == 'rock') {
-        return 'You Win! Paper beats Rock';
+        playerScore += 1;
+        res.textContent = 'You Win! Paper beats Rock' + `current score is ${playerScore} : ${computerScore}`;
+        console.log(playerScore + ':' +  computerScore);
+        console.log('მეშვიდე იფი');
     } 
 }
 
-function game() {
+function userInputValidation(userInput) {
+    return userInput == 'rock' || userInput == 'paper' || userInput == 'scissors';
+}
+
+// ----------------
+const buttons = document.querySelectorAll('button');
+// const rock = document.getElementById('rock');
+// const paper = document.getElementById('paper');
+// const scissors = document.getElementById('scissors');
+function play(e) {
+    const rock = document.getElementById('rock');
+    const paper = document.getElementById('paper');
+    const scissors = document.getElementById('scissors');
+}
+// rock.addEventListener('click', playRound());
+// buttons.addEventListener('click', play);
+
+// console.log(buttons);
+
+
+
+function game(userInput) {
     let playerScore = 0;
     let computerScore = 0;
     for (let i = 0; i < 3; i++) {
-        let userInput = prompt('Rock, Paper, or Scissors ?');
+        // let userInput = prompt('Rock, Paper, or Scissors ?');
         userInput = userInput.toLowerCase();
-        if (userInput == 'rock' || userInput == 'paper' || userInput == 'scissors') { 
+        if (userInputValidation(userInput)) { 
             let computerSelection = getComputerChoice();
             let oneRound = playRound(userInput, computerSelection);
             console.log(oneRound);
@@ -50,4 +96,10 @@ function game() {
     }
 }
 
-game();
+// game(userInput);
+
+buttons.forEach(button => button.addEventListener('click', () => {
+    let userInput = button.textContent;
+    playRound(userInput, getComputerChoice());
+    // console.log(button.textContent);
+}));
