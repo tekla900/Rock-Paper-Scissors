@@ -29,85 +29,48 @@ function playRound(playerSelection, computerSelection) {
     } 
 }
 
-const buttons = document.querySelectorAll('button');
-
 function gameOver() {
     const container = document.querySelector('.container');
     const p = document.createElement('p');
     p.textContent = 'Game Over';
     container.append(p);
+    const h3 = document.querySelector('.score');
+    h3.textContent = '';
+    //თავიდან დასაწყებად უნდა გასუფთავდეს რიზალთის, სქორის და პ-ის მნიშვნელობა
+    //და თავიდან გამოძახებული იქნას გეიმ ფუნქცია
 }
 
 function game() {
     let playerScore = 0;
     let computerScore = 0;
-    let moves = 0;
-    const buttons = document.querySelectorAll('button');
+
     const rock = document.getElementById('rock');
     const paper = document.getElementById('paper');
     const scissors = document.getElementById('scissors');
     const playerOptions = [rock, paper, scissors];
 
-    // for (let i = 0; i < 3; i++) {
-    // while (playerScore < 3 || computerScore < 3) {
-        playerOptions.forEach(option => {
-            option.addEventListener('click', () => {
-                let userInput = option.textContent.toLowerCase();
-                let computerSelection = getComputerChoice();
-                let result = playRound(userInput, computerSelection);
-                console.log(result + '  დაიცა');
-                if (result == 'W') {
-                    playerScore += 1;
-                    moves += 1;
-                } else if (result == 'L') {
-                    computerScore += 1;
-                    moves += 1;
-                }
-                console.log(playerScore + ":" + computerScore + 'loop-ის შიგნით რომელიცაა');
-                
-                if (playerScore === 3 || computerScore === 3) {
-                    gameOver();
-                }
-            })
-            // moves += 1;
+    playerOptions.forEach(option => {
+        option.addEventListener('click', () => {
+            let userInput = option.textContent.toLowerCase();
+            let computerSelection = getComputerChoice();
+            let result = playRound(userInput, computerSelection);
+            console.log(result + '  დაიცა');
+            if (result == 'W') {
+                playerScore += 1;
+            } else if (result == 'L') {
+                computerScore += 1;
+            }
+            const h3 = document.querySelector('.score');
+            h3.textContent = `Current score is: ${playerScore} : ${computerScore}`
             
-        })
-
-        // if (moves == 3)
-        // buttons.forEach(button => button.addEventListener('click', () => {
-        //     let userInput = button.textContent.toLowerCase();
-        //     let computerSelection = getComputerChoice();
-        //     let result = playRound(userInput, computerSelection);
-        //     console.log(result + '  დაიცა');
-        //     if (result == 'W') {
-        //         playerScore += 1;
-        //         moves += 1;
-        //     } else if (result == 'L') {
-        //         computerScore += 1;
-        //         moves += 1;
-        //     }
-        //     console.log(playerScore + ":" + computerScore + 'loop-ის შიგნით რომელიცაა');
-
-        // }))
-        // console.log('this');
-        // moves += 1;
-    // }
-
-    console.log(playerScore + ":" + computerScore + 'loop-ის გარეთ რომელიცაა');
-
-   
+            if (playerScore === 2 || computerScore === 2) {
+                gameOver();
+            }
+        })            
+    })  
 }
-
-function getUserChoice(button) {
-    return button.textContent.toLowerCase();
-}
-
-
-// buttons.forEach(button => button.addEventListener('click', () => {
-//     // let userInput = button.textContent;
-//     console.log('clicked');
-//     game(); //აქ გადაეცემა ქაღალდი
-
-// }));
 
 game();
+
+
+//ანდა პირდაპირ შემიძლია იფ სტეიტმენტშივე გავასუფთავო
