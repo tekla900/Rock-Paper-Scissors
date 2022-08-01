@@ -33,7 +33,7 @@ function game() {
     const res = document.querySelector('.results');
     res.textContent = '';
     const p = document.querySelector('.p');
-    p.textContent = '';
+    
     let playerScore = 0;
     let computerScore = 0;
 
@@ -45,6 +45,7 @@ function game() {
 
     playerOptions.forEach(option => {
         option.addEventListener('click', () => {
+            p.textContent = '';
             let userInput = option.textContent.toLowerCase();
             let computerSelection = getComputerChoice();
             let result = playRound(userInput, computerSelection);
