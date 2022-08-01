@@ -30,9 +30,11 @@ function playRound(playerSelection, computerSelection) {
 }
 
 function game() {
+    const buttons = document.querySelector('.buttons');
+    const restart = document.querySelector('.restart');
     const res = document.querySelector('.results');
-    res.textContent = '';
     const p = document.querySelector('.p');
+    res.textContent = '';
     
     let playerScore = 0;
     let computerScore = 0;
@@ -45,11 +47,12 @@ function game() {
 
     playerOptions.forEach(option => {
         option.addEventListener('click', () => {
+            // buttons.classList.remove('hidden');
             p.textContent = '';
             let userInput = option.textContent.toLowerCase();
             let computerSelection = getComputerChoice();
             let result = playRound(userInput, computerSelection);
-            console.log(result + '  დაიცა');
+            // console.log(result + '  დაიცა');
             if (result == 'W') {
                 playerScore += 1;
             } else if (result == 'L') {
@@ -63,7 +66,12 @@ function game() {
                 h3.textContent = '';
                 playerScore = 0;
                 computerScore = 0;
-                
+                buttons.classList.add('hidden');
+                restart.classList.remove('hidden');
+                restart.addEventListener('click', () => {
+                    buttons.classList.remove('hidden');
+                    restart.classList.add('hidden');
+                })
             }
         })            
     })  

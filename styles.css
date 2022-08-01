@@ -1,0 +1,32 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    /* font-family: 'Roboto'; */
+}
+
+body {
+    background-color: #B9DDEA;
+    text-align: center;
+    margin-top: 10%;
+}
+
+h1 {
+    font-family: 'Roboto';
+    color: #325866;
+    font-weight: bolder;
+    letter-spacing: 4px;
+    font-size: 48px;
+    /* font-weight: 900; */
+}
+
+button {
+    padding: 2%;
+    width: 15%;
+    border-radius: 20%;
+    border: none;
+}
+
+.hidden {
+    visibility: hidden;
+}
