@@ -4,91 +4,84 @@ function getComputerChoice() {
 }
 
 function playRound(playerSelection, computerSelection) {
-
-    // let playerScore = 0;
-    // let computerScore = 0;
     const res = document.querySelector('.results');
 
     if (playerSelection.toLowerCase() == computerSelection) {
-        res.textContent = "It's a Tie!" + `current score is ${playerScore} : ${computerScore}`;
-        console.log('პირველი იფი');
-        // console.log(playerScore + ':' +  computerScore);
+        res.textContent = "It's a Tie!";
     } else if (playerSelection.toLowerCase() == 'rock' && computerSelection == 'scissors') {
-        playerScore += 1;
-        res.textContent = 'You Win! Rock beats Scissors' + `current score is ${playerScore} : ${computerScore}`;
-        // console.log(playerScore + ':' +  computerScore);
-        console.log('მეორე');
+        res.textContent = 'You Win! Rock beats Scissors';
+        return "W";
     } else if (playerSelection.toLowerCase() == 'scissors' && computerSelection == 'rock') {
-        computerScore += 1;
-        res.textContent = 'You Lose! Rock beats Scissors' + `current score is ${playerScore} : ${computerScore}`;
-        console.log(playerScore + ':' +  computerScore);
-        console.log('მესამე იფი');
+        res.textContent = 'You Lose! Rock beats Scissors';
+        return "L";
     } else if (playerSelection.toLowerCase() == 'paper' && computerSelection == 'scissors') {
-        computerScore += 1;
-        res.textContent = 'You Lose! Scissors beats Paper' + `current score is ${playerScore} : ${computerScore}`;
-        console.log(playerScore + ':' +  computerScore);
-        console.log('მეოთხე იფი');
+        res.textContent = 'You Lose! Scissors beats Paper';
+        return "L";
     } else if (playerSelection.toLowerCase() == 'scissors' && computerSelection == 'paper') {
-        playerScore += 1;
-        res.textContent = 'You Win! Scissors beats Paper' + `current score is ${playerScore} : ${computerScore}`;
-        console.log(playerScore + ':' +  computerScore);
-        console.log('მეხუთე');
+        res.textContent = 'You Win! Scissors beats Paper';
+        return "W";
     } else if (playerSelection.toLowerCase() == 'rock' && computerSelection == 'paper') {
-        computerScore += 1;
-        res.textContent = 'You Lose! Paper beats Rock' + `current score is ${playerScore} : ${computerScore}`;
-        console.log(playerScore + ':' +  computerScore);
-        console.log('მეექვსე');
+        res.textContent = 'You Lose! Paper beats Rock';
+        return "L";
     } else if (playerSelection.toLowerCase() == 'paper' && computerSelection == 'rock') {
-        playerScore += 1;
-        res.textContent = 'You Win! Paper beats Rock' + `current score is ${playerScore} : ${computerScore}`;
-        console.log(playerScore + ':' +  computerScore);
-        console.log('მეშვიდე იფი');
+        res.textContent = 'You Win! Paper beats Rock' ;
+        return "W";
     } 
 }
 
-function userInputValidation(userInput) {
-    return userInput == 'rock' || userInput == 'paper' || userInput == 'scissors';
-}
-
-// ----------------
 const buttons = document.querySelectorAll('button');
-// const rock = document.getElementById('rock');
-// const paper = document.getElementById('paper');
-// const scissors = document.getElementById('scissors');
-function play(e) {
+
+function game() {
+    let playerScore = 0;
+    let computerScore = 0;
+    let moves = 0;
+    const buttons = document.querySelectorAll('button');
     const rock = document.getElementById('rock');
     const paper = document.getElementById('paper');
     const scissors = document.getElementById('scissors');
-}
-// rock.addEventListener('click', playRound());
-// buttons.addEventListener('click', play);
+    const playerOptions = [rock, paper, scissors];
 
-// console.log(buttons);
+    // for (let i = 0; i < 3; i++) {
+    while (moves < 3) {
+        playerOptions.forEach(option => {
+            option.addEventListener('click', () => {
+                let userInput = option.textContent.toLowerCase();
+                let computerSelection = getComputerChoice();
+                let result = playRound(userInput, computerSelection);
+                console.log(result + '  დაიცა');
+                if (result == 'W') {
+                    playerScore += 1;
+                    moves += 1;
+                } else if (result == 'L') {
+                    computerScore += 1;
+                    moves += 1;
+                }
+                console.log(playerScore + ":" + computerScore + 'loop-ის შიგნით რომელიცაა');
+    
+            })
+            moves += 1;
+        })
+        // buttons.forEach(button => button.addEventListener('click', () => {
+        //     let userInput = button.textContent.toLowerCase();
+        //     let computerSelection = getComputerChoice();
+        //     let result = playRound(userInput, computerSelection);
+        //     console.log(result + '  დაიცა');
+        //     if (result == 'W') {
+        //         playerScore += 1;
+        //         moves += 1;
+        //     } else if (result == 'L') {
+        //         computerScore += 1;
+        //         moves += 1;
+        //     }
+        //     console.log(playerScore + ":" + computerScore + 'loop-ის შიგნით რომელიცაა');
 
-
-
-function game(userInput) {
-    let playerScore = 0;
-    let computerScore = 0;
-    for (let i = 0; i < 3; i++) {
-        // let userInput = prompt('Rock, Paper, or Scissors ?');
-        userInput = userInput.toLowerCase();
-        if (userInputValidation(userInput)) { 
-            let computerSelection = getComputerChoice();
-            let oneRound = playRound(userInput, computerSelection);
-            console.log(oneRound);
-            let result = oneRound.slice(4, 5);
-            if (result == 'W') {
-                playerScore += 1;
-            } else if (result == 'L') {
-                computerScore += 1;
-            }
-            
-        } else {
-            console.log('invalid input');
-            break;
-        }
+        // }))
+        // console.log('this');
+        // moves += 1;
     }
+
+    console.log(playerScore + ":" + computerScore + 'loop-ის გარეთ რომელიცაა');
+
     if (playerScore > computerScore) {
         console.log(`Yon won! Final score is ${playerScore}:${computerScore}`)
     } else {
@@ -96,10 +89,16 @@ function game(userInput) {
     }
 }
 
-// game(userInput);
+function getUserChoice(button) {
+    return button.textContent.toLowerCase();
+}
 
-buttons.forEach(button => button.addEventListener('click', () => {
-    let userInput = button.textContent;
-    playRound(userInput, getComputerChoice());
-    // console.log(button.textContent);
-}));
+
+// buttons.forEach(button => button.addEventListener('click', () => {
+//     // let userInput = button.textContent;
+//     console.log('clicked');
+//     game(); //აქ გადაეცემა ქაღალდი
+
+// }));
+
+game();
