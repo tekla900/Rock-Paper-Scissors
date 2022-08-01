@@ -29,18 +29,11 @@ function playRound(playerSelection, computerSelection) {
     } 
 }
 
-function gameOver() {
-    const container = document.querySelector('.container');
-    const p = document.createElement('p');
-    p.textContent = 'Game Over';
-    container.append(p);
-    const h3 = document.querySelector('.score');
-    h3.textContent = '';
-    //თავიდან დასაწყებად უნდა გასუფთავდეს რიზალთის, სქორის და პ-ის მნიშვნელობა
-    //და თავიდან გამოძახებული იქნას გეიმ ფუნქცია
-}
-
 function game() {
+    const res = document.querySelector('.results');
+    res.textContent = '';
+    const p = document.querySelector('.p');
+    p.textContent = '';
     let playerScore = 0;
     let computerScore = 0;
 
@@ -48,6 +41,7 @@ function game() {
     const paper = document.getElementById('paper');
     const scissors = document.getElementById('scissors');
     const playerOptions = [rock, paper, scissors];
+    const h3 = document.querySelector('.score');
 
     playerOptions.forEach(option => {
         option.addEventListener('click', () => {
@@ -60,11 +54,15 @@ function game() {
             } else if (result == 'L') {
                 computerScore += 1;
             }
-            const h3 = document.querySelector('.score');
+            
             h3.textContent = `Current score is: ${playerScore} : ${computerScore}`
             
             if (playerScore === 2 || computerScore === 2) {
-                gameOver();
+                p.textContent = `Game Over! Final score is: ${playerScore}:${computerScore}`;
+                h3.textContent = '';
+                playerScore = 0;
+                computerScore = 0;
+                
             }
         })            
     })  
@@ -73,4 +71,3 @@ function game() {
 game();
 
 
-//ანდა პირდაპირ შემიძლია იფ სტეიტმენტშივე გავასუფთავო
