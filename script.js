@@ -31,6 +31,13 @@ function playRound(playerSelection, computerSelection) {
 
 const buttons = document.querySelectorAll('button');
 
+function gameOver() {
+    const container = document.querySelector('.container');
+    const p = document.createElement('p');
+    p.textContent = 'Game Over';
+    container.append(p);
+}
+
 function game() {
     let playerScore = 0;
     let computerScore = 0;
@@ -42,7 +49,7 @@ function game() {
     const playerOptions = [rock, paper, scissors];
 
     // for (let i = 0; i < 3; i++) {
-    while (moves < 3) {
+    // while (playerScore < 3 || computerScore < 3) {
         playerOptions.forEach(option => {
             option.addEventListener('click', () => {
                 let userInput = option.textContent.toLowerCase();
@@ -57,10 +64,16 @@ function game() {
                     moves += 1;
                 }
                 console.log(playerScore + ":" + computerScore + 'loop-ის შიგნით რომელიცაა');
-    
+                
+                if (playerScore === 3 || computerScore === 3) {
+                    gameOver();
+                }
             })
-            moves += 1;
+            // moves += 1;
+            
         })
+
+        // if (moves == 3)
         // buttons.forEach(button => button.addEventListener('click', () => {
         //     let userInput = button.textContent.toLowerCase();
         //     let computerSelection = getComputerChoice();
@@ -78,15 +91,11 @@ function game() {
         // }))
         // console.log('this');
         // moves += 1;
-    }
+    // }
 
     console.log(playerScore + ":" + computerScore + 'loop-ის გარეთ რომელიცაა');
 
-    if (playerScore > computerScore) {
-        console.log(`Yon won! Final score is ${playerScore}:${computerScore}`)
-    } else {
-        console.log(`Yon Lost! Final score is ${playerScore}:${computerScore}`)
-    }
+   
 }
 
 function getUserChoice(button) {
