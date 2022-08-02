@@ -14,17 +14,36 @@ body {
 h1 {
     font-family: 'Roboto';
     color: #325866;
-    font-weight: bolder;
+    font-weight: 900;
     letter-spacing: 4px;
     font-size: 48px;
+    margin-bottom: 5%;
     /* font-weight: 900; */
 }
 
+.results, .score, .p {
+    margin-bottom: 2.5%;
+}
+
+.buttons {
+    width: 80%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-around;
+}
 button {
     padding: 2%;
     width: 15%;
     border-radius: 20%;
     border: none;
+
+}
+
+button:hover {
+    transform: scale(1.1);
+    cursor: pointer;
+    font-weight: 600;
+    /* background-color: rgb(205, 212, 218); */
 }
 
 .hidden {
